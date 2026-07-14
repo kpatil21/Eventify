@@ -1,0 +1,61 @@
+Phase 1: Project setup (Git, React, Node, Tailwind, folder structure)
+       we have installted node.js Git, VScode, Postman
+       we cretaed folder structure 
+          Eventify
+             client
+             server
+             doc
+             .gitignore
+             Readme.md
+we will install reactJs in client folder
+1. Before we type the command, let's understand why we're using Vite instead of Create React App (CRA).
+   Create React App (Old Way)
+Slower startup
+Slower builds
+Larger bundle size
+Less commonly used in new projects
+Vite (Modern Way) âœ…
+âš¡ Extremely fast startup
+âš¡ Instant Hot Module Replacement (HMR)
+ðŸ“¦ Optimized builds
+ðŸš€ Widely used in modern React projects
+Run: In CMD
+cd client
+npm create vite@latest .
+Error: 
+npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled 
+on this system. For more information, see about_Execution_Policies at 
+https:/go.microsoft.com/fwlink/?LinkID=135170.
+At line:1 char:1
++ npm create vite@latest .
++ ~~~
+    + CategoryInfo          : SecurityError: (:) [], PSSecurityException
+    + FullyQualifiedErrorId : UnauthorizedAccess
+Solution: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+        Then verify the change by running: Get-ExecutionPolicy -Scope CurrentUser
+        it should retun: RemoteSigned
+select Framework: React
+select Variant: JavaScript
+Which linter would you like to use?
+âœ… ESLint
+Why ESLint?
+
+ESLint helps you:
+
+Catch mistakes early.
+Maintain consistent code style.
+Learn React best practices.
+Write cleaner, more professional code.
+
+then we Got : http://localhost:5173/
+
+
+*  ? Phase 1 – Project Setup (Completed) 
+*  ? Phase 2 – Frontend Layout 
+*  ? Phase 3 – Backend Setup 
+*  ? Phase 4 – Authentication 
+*  ? Phase 5 – Events CRUD 
+*  ? Phase 6 – Booking Module 
+*  ? Phase 7 – Admin Dashboard 
+*  ? Phase 8 – Image Uploads 
+*  ? Phase 9 – Deployment
