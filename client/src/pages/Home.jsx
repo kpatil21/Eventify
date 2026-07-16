@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa";
 import digitalEvents from "../assets/images/hero/digital.png";
 import outdoorEvents from "../assets/images/hero/outdoor.png";
+import story from "../assets/images/featured/story.png";
 
 const Home = () => {
   return (
@@ -85,7 +86,7 @@ const Home = () => {
 </section>
 {/* ================= About Eventify ================= */}
 
-<section className="py-20 bg-white">
+<section className="min-h-screen bg-white flex items-center">
 
   <div className="max-w-5xl mx-auto px-6 text-center">
 
@@ -93,13 +94,13 @@ const Home = () => {
       DISCOVER • LEARN • GROW
     </span>
 
-    <h2 className="mt-5 text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
+    <h2 className="mt-6 text-5xl md:text-7xl font-bold text-slate-900 leading-tight">
       Every Event
       <br />
       Becomes a Learning Journey
     </h2>
 
-    <p className="mt-8 max-w-3xl mx-auto text-lg md:text-xl leading-9 text-slate-600">
+    <p className="mt-8 max-w-3xl mx-auto text-xl leading-9 text-slate-600">
       Eventify by Kaksha brings together inspiring online workshops,
       creative experiences and exciting outdoor adventures—helping children
       build confidence, creativity, friendships and lifelong skills through
@@ -193,8 +194,7 @@ const Home = () => {
 
 {/* ================= Featured Events ================= */}
 
-<section className="min-h-[90vh] flex items-center bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC]">
-
+<section className="min-h-[calc(100vh-80px)] flex items-center bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] py-10">
   <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
 
     {/* Heading */}
@@ -226,7 +226,7 @@ const Home = () => {
       <div className="lg:col-span-2 relative rounded-[32px] overflow-hidden h-[520px] group">
 
         <img
-          src="https://picsum.photos/1000/700"
+          src={story}
           className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
         />
 
@@ -444,21 +444,25 @@ const Home = () => {
 
 </section>
 
+{/* ================= How Eventify Works ================= */}
+
 <section className="py-24 bg-[#FAFAF9]">
   <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
     <div className="text-center mb-16">
-      <span className="text-blue-600 font-semibold uppercase tracking-widest">
-        Simple Process
+
+      <span className="text-[#D4AF37] text-sm font-semibold uppercase tracking-[5px]">
+        SIMPLE PROCESS
       </span>
 
       <h2 className="mt-3 text-4xl font-bold text-slate-900">
         How Eventify Works
       </h2>
 
-      <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+      <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-8">
         Finding the perfect activity for your child is simple and takes only a few minutes.
       </p>
+
     </div>
 
     <div className="grid md:grid-cols-4 gap-8">
@@ -488,7 +492,7 @@ const Home = () => {
 
         <div
           key={step.no}
-          className="relative bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+          className="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-2"
         >
 
           <div className="w-14 h-14 rounded-full bg-slate-900 text-white flex items-center justify-center text-xl font-bold">
@@ -514,25 +518,29 @@ const Home = () => {
 {/* ================= Parent Testimonials ================= */}
 
 <section className="py-24 bg-white">
+
   <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
     {/* Heading */}
+
     <div className="text-center mb-16">
 
-      <span className="text-blue-600 uppercase tracking-widest font-semibold">
-        Testimonials
+      <span className="text-[#D4AF37] text-sm font-semibold uppercase tracking-[5px]">
+        TESTIMONIALS
       </span>
 
       <h2 className="mt-3 text-4xl font-bold text-slate-900">
         Loved by Parents & Kids
       </h2>
 
-      <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+      <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto leading-8">
         Families trust Eventify to discover safe, engaging and meaningful
         experiences for their children.
       </p>
 
     </div>
+
+    {/* Testimonials */}
 
     <div className="grid lg:grid-cols-3 gap-8">
 
@@ -559,20 +567,26 @@ const Home = () => {
 
         <div
           key={index}
-          className="bg-slate-50 rounded-3xl p-8 hover:shadow-xl transition-all duration-300"
+          className="bg-[#FAFAF9] rounded-3xl border border-slate-100 p-8 shadow-sm hover:shadow-xl hover:border-[#D4AF37]/40 transition-all duration-300 hover:-translate-y-2"
         >
 
-          <div className="text-yellow-500 text-xl">
-            ⭐⭐⭐⭐⭐
+          {/* Rating */}
+
+          <div className="text-[#D4AF37] text-xl tracking-wide">
+            ★★★★★
           </div>
+
+          {/* Review */}
 
           <p className="mt-6 text-slate-600 leading-8 italic">
             "{item.review}"
           </p>
 
+          {/* Parent */}
+
           <div className="mt-8 flex items-center gap-4">
 
-            <div className="w-14 h-14 rounded-full bg-slate-900 text-white flex items-center justify-center text-xl font-bold">
+            <div className="w-14 h-14 rounded-full bg-slate-900 text-white flex items-center justify-center text-xl font-bold shadow-md">
               {item.name.charAt(0)}
             </div>
 
@@ -597,93 +611,9 @@ const Home = () => {
     </div>
 
   </div>
+
 </section>
-{/* ================= Upcoming Events ================= */}
 
-<section className="py-24 bg-[#FAFAF9]">
-  <div className="max-w-7xl mx-auto px-6 lg:px-8">
-
-    <div className="flex flex-col md:flex-row justify-between items-center mb-14">
-
-      <div>
-        <span className="text-blue-600 uppercase tracking-widest font-semibold">
-          Coming Soon
-        </span>
-
-        <h2 className="mt-3 text-4xl font-bold text-slate-900">
-          Upcoming Events
-        </h2>
-      </div>
-
-      <button className="mt-5 md:mt-0 border border-slate-300 px-6 py-3 rounded-xl hover:bg-slate-900 hover:text-white transition">
-        View Calendar
-      </button>
-
-    </div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      {[
-        {
-          date: "15 Aug",
-          title: "Independence Day Art Workshop",
-          type: "Digital",
-          age: "5-8 Years",
-        },
-        {
-          date: "20 Aug",
-          title: "Kids Football Camp",
-          type: "Outdoor",
-          age: "7-12 Years",
-        },
-        {
-          date: "25 Aug",
-          title: "Ramayana Storytelling",
-          type: "Digital",
-          age: "4-10 Years",
-        },
-      ].map((event, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
-        >
-          <div className="flex justify-between items-center">
-
-            <div className="text-3xl font-bold text-slate-900">
-              {event.date}
-            </div>
-
-            <span
-              className={`px-4 py-1 rounded-full text-sm font-semibold ${
-                event.type === "Digital"
-                  ? "bg-blue-100 text-blue-700"
-                  : "bg-green-100 text-green-700"
-              }`}
-            >
-              {event.type}
-            </span>
-
-          </div>
-
-          <h3 className="mt-8 text-2xl font-bold text-slate-900">
-            {event.title}
-          </h3>
-
-          <p className="mt-3 text-slate-600">
-            Age Group: {event.age}
-          </p>
-
-          <button className="mt-8 w-full bg-slate-900 text-white py-3 rounded-xl hover:bg-blue-600 transition">
-            View Details
-          </button>
-
-        </div>
-      ))}
-
-    </div>
-
-  </div>
-</section>
 {/* ================= Final CTA ================= */}
 
 <section className="py-24 bg-slate-900">
