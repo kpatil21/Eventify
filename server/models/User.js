@@ -56,9 +56,9 @@ profileImage: {
     type: String,
     default: ""
 },
-isVerified: {
+isActive: {
     type: Boolean,
-    default: false
+    default: true
 },
 },
 {
@@ -89,3 +89,4 @@ isVerified: {
 // - deleteOne()
 // - save()
 const User = mongoose.model("User", userSchema);
+module.exports = User;

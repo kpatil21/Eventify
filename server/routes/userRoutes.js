@@ -17,15 +17,17 @@ const router = express.Router();
 // =========================================================
 
 // Import the registerUser controller.
-const { registerUser } = require("../controllers/userController");
-
+const {
+    registerUser,
+    loginUser
+} = require("../controllers/userController");
 // =========================================================
 // User Routes
 // =========================================================
 
 // Register a new user.
 router.post("/register", registerUser);
-
+router.post("/login", loginUser);
 // =========================================================
 // Export Router
 // =========================================================
