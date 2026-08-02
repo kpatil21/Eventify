@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../../assets/logo/logo.jpg";
 
-export default function Navbar() {
+export default function Navbar({ openLogin, openRegister })  {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -87,18 +87,21 @@ export default function Navbar() {
 
         {/* Right */}
         <div className="flex items-center gap-5">
-          <NavLink to="/login" className={navLinkClass}>
-            Login
-          </NavLink>
+         <button
+             onClick={() => {
+    console.log("Login clicked");
+    openLogin();
+  }}
+            className="relative font-medium text-white hover:text-[#D4AF37] transition-all duration-300"
+          >Login
+         </button>
 
-          <NavLink
-            to="/register"
+         <button
+            onClick={openRegister}
             className={`bg-[#D4AF37] hover:bg-[#c79b22] text-black rounded-full font-semibold transition-all duration-300 ${
-              scrolled ? "px-5 py-2 text-sm" : "px-6 py-2.5"
-            }`}
-          >
-            Register
-          </NavLink>
+            scrolled ? "px-5 py-2 text-sm" : "px-6 py-2.5"
+            }`}>Register
+         </button>
         </div>
       </nav>
     </header>

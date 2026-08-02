@@ -1,4 +1,5 @@
 import { FaArrowRight } from "react-icons/fa";
+import React, { useState } from "react";
 import {
   FaShieldAlt,
   FaLaptop,

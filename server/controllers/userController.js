@@ -13,6 +13,7 @@
 // - deleteOne()
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 // =========================================================
 // Register User
 // =========================================================
@@ -73,15 +74,66 @@ if (existingUser) {
 
 const loginUser = async (req, res) => {
 
-    // Read email and password from request body
+    // Read email and password
     const { email, password } = req.body;
 
+    // Validate input
+    if (!email || !password) {
+        return res.status(400).json({
+            success: false,
+            message: "Please provide email and password"
+        });
+    }
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return res.status(404).json({
+            success: false,
+            message: "User not found"
+        });
+    }
+
+    // Compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        return res.status(401).json({
+            success: false,
+            message: "Invalid email or password"
+        });
+    }
+
+    // ✅ ADD JWT TOKEN HERE
+    const token = jwt.sign(
+        {
+            id: user._id,
+            role: user.role
+        },
+        process.env.JWT_SECRET,
+        {
+            expiresIn: process.env.JWT_EXPIRES_IN
+        }
+    );
+
+    // User data (without password)
+    const userData = {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        profileImage: user.profileImage,
+        isActive: user.isActive
+    };
+
+    // Response
     res.status(200).json({
         success: true,
-        data: {
-            email,
-            password
-        }
+        message: "Login successful",
+        token,          // <-- Add this line
+        user: userData
     });
 
 };
@@ -90,5 +142,6 @@ const loginUser = async (req, res) => {
 // =========================================================
 
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser
 };
