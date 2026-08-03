@@ -1,27 +1,41 @@
-import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+
+import { NavLink, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import {
+  FaChevronDown,
+  FaTachometerAlt,
+  FaSignOutAlt,
+} from "react-icons/fa";
+
 import logo from "../../assets/logo/logo.jpg";
 
 export default function Navbar({ openLogin, openRegister })  {
-  const [scrolled, setScrolled] = useState(false);
-  const [user, setUser] = useState(null);
+const [scrolled, setScrolled] = useState(false);
+const [user, setUser] = useState(null);
+const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+const dropdownRef = useRef(null);
+const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+  const loadUser = () => {
+    const loggedInUser = localStorage.getItem("user");
 
-    window.addEventListener("scroll", handleScroll);
-    // Check if user is logged in
-const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      setUser(JSON.parse(loggedInUser));
+    } else {
+      setUser(null);
+    }
+  };
 
-if (loggedInUser) {
-    setUser(JSON.parse(loggedInUser));
-}
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  loadUser();
+
+  window.addEventListener("userChanged", loadUser);
+
+  return () => {
+    window.removeEventListener("userChanged", loadUser);
+  };
+}, []);
 
   const navLinkClass = ({ isActive }) =>
     `relative font-medium transition-all duration-300 ${
@@ -29,11 +43,14 @@ if (loggedInUser) {
         ? "text-[#D4AF37] after:absolute after:left-0 after:-bottom-2 after:w-full after:h-[2px] after:bg-[#D4AF37]"
         : "text-white hover:text-[#D4AF37]"
     }`;
- const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+const handleLogout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
 
-    setUser(null);
+  setUser(null);
+  setIsDropdownOpen(false);
+
+  navigate("/");
 };
   return (
     <header
@@ -99,20 +116,93 @@ if (loggedInUser) {
         {/* Right */}
        <div className="flex items-center gap-5">
 
-    {user ? (
-        <>
-            <span className="font-medium text-white">
-                 {user.name}
-            </span>
+  {user ? (
+  <div className="relative" ref={dropdownRef}>
 
-            <button
-                onClick={handleLogout}
-                className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full text-white transition"
-            >
-                Logout
-            </button>
-        </>
-    ) : (
+    <button
+      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      className="flex items-center gap-3 px-3 py-2 rounded-full
+      bg-[#44444E]/80 hover:bg-[#555560] transition-all"
+    >
+
+      <div className="w-9 h-9 rounded-full bg-[#D4AF37]
+      flex items-center justify-center font-bold text-black">
+
+        {user.name.charAt(0).toUpperCase()}
+
+      </div>
+
+      <span className="text-white font-medium">
+        {user.name.split(" ")[0]}
+      </span>
+
+      <FaChevronDown
+        className={`text-white transition-transform ${
+          isDropdownOpen ? "rotate-180" : ""
+        }`}
+      />
+
+    </button>
+
+    {isDropdownOpen && (
+  <div className="absolute right-0 mt-3 w-72 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden z-50">
+
+    {/* User Info */}
+    <div className="px-5 py-4 bg-gray-50 border-b">
+
+      <h3 className="font-semibold text-gray-800">
+        {user.name}
+      </h3>
+
+      <p className="text-sm text-gray-500">
+        {user.email}
+      </p>
+
+    </div>
+
+    {/* Dashboard */}
+    <NavLink
+      to={
+        user.role === "parent"
+          ? "/parent/dashboard"
+          : user.role === "organizer"
+          ? "/organizer/dashboard"
+          : "/admin/dashboard"
+      }
+      onClick={() => setIsDropdownOpen(false)}
+      className="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 transition"
+    >
+      <FaTachometerAlt className="text-[#D4AF37]" />
+
+      <span>
+        {user.role === "parent"
+          ? "Parent Dashboard"
+          : user.role === "organizer"
+          ? "Organizer Dashboard"
+          : "Admin Dashboard"}
+      </span>
+
+    </NavLink>
+
+    {/* Divider */}
+    <div className="border-t"></div>
+
+    {/* Logout */}
+    <button
+      onClick={handleLogout}
+      className="w-full flex items-center gap-3 px-5 py-3 text-red-600 hover:bg-red-50 transition"
+    >
+      <FaSignOutAlt />
+
+      <span>Logout</span>
+
+    </button>
+
+  </div>
+)}
+
+  </div>
+) : (
         <>
             <button
                 onClick={() => {
