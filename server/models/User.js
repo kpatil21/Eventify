@@ -44,7 +44,7 @@ password: {
 },
 phone: {
     type: String,
-    required: [true, "Phone number is required"],
+    default: "",
     trim: true
 },
 role: {

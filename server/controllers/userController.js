@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
     try {
 
         // Read data from request body
-        const { name, email, password, phone } = req.body;
+        const { name, email, password } = req.body;
           
  // Check if email already exists
 const existingUser = await User.findOne({ email });
@@ -50,8 +50,7 @@ if (existingUser) {
         const user = await User.create({
             name,
             email,
-            password: hashedPassword,
-            phone
+            password: hashedPassword
         });
 
         // Send response

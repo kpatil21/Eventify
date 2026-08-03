@@ -4,6 +4,7 @@ import logo from "../../assets/logo/logo.jpg";
 
 export default function Navbar({ openLogin, openRegister })  {
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -11,7 +12,12 @@ export default function Navbar({ openLogin, openRegister })  {
     };
 
     window.addEventListener("scroll", handleScroll);
+    // Check if user is logged in
+const loggedInUser = localStorage.getItem("user");
 
+if (loggedInUser) {
+    setUser(JSON.parse(loggedInUser));
+}
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -23,7 +29,12 @@ export default function Navbar({ openLogin, openRegister })  {
         ? "text-[#D4AF37] after:absolute after:left-0 after:-bottom-2 after:w-full after:h-[2px] after:bg-[#D4AF37]"
         : "text-white hover:text-[#D4AF37]"
     }`;
+ const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
+    setUser(null);
+};
   return (
     <header
       className={`sticky top-0 z-50 border-b border-neutral-800 transition-all duration-300 ${
@@ -86,23 +97,48 @@ export default function Navbar({ openLogin, openRegister })  {
         </div>
 
         {/* Right */}
-        <div className="flex items-center gap-5">
-         <button
-             onClick={() => {
-    console.log("Login clicked");
-    openLogin();
-  }}
-            className="relative font-medium text-white hover:text-[#D4AF37] transition-all duration-300"
-          >Login
-         </button>
+       <div className="flex items-center gap-5">
 
-         <button
-            onClick={openRegister}
-            className={`bg-[#D4AF37] hover:bg-[#c79b22] text-black rounded-full font-semibold transition-all duration-300 ${
-            scrolled ? "px-5 py-2 text-sm" : "px-6 py-2.5"
-            }`}>Register
-         </button>
-        </div>
+    {user ? (
+        <>
+            <span className="font-medium text-white">
+                👋 {user.name}
+            </span>
+
+            <button
+                onClick={handleLogout}
+                className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full text-white transition"
+            >
+                Logout
+            </button>
+        </>
+    ) : (
+        <>
+            <button
+                onClick={() => {
+                    console.log("Login clicked");
+                    openLogin();
+                }}
+                className="relative font-medium text-white hover:text-[#D4AF37] transition-all duration-300"
+            >
+                Login
+            </button>
+
+            <button
+                onClick={() => {
+                    console.log("Register clicked");
+                    openRegister();
+                }}
+                className={`bg-[#D4AF37] hover:bg-[#c79b22] text-black rounded-full font-semibold transition-all duration-300 ${
+                    scrolled ? "px-5 py-2 text-sm" : "px-6 py-2.5"
+                }`}
+            >
+                Register
+            </button>
+        </>
+    )}
+
+</div>
       </nav>
     </header>
   );
