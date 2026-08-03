@@ -102,7 +102,7 @@ if (loggedInUser) {
     {user ? (
         <>
             <span className="font-medium text-white">
-                👋 {user.name}
+                 {user.name}
             </span>
 
             <button
