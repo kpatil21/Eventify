@@ -639,7 +639,7 @@ const Home = () => {
 
           <p className="mt-6 text-slate-300 text-lg leading-8">
             Whether you're a parent looking for meaningful activities or an
-            organizer planning engaging events, Eventify helps bring learning
+            kid searching For engaging events, Eventify helps bring learning
             and fun together.
           </p>
 
@@ -649,9 +649,9 @@ const Home = () => {
               Explore Events
             </button>
 
-            <button className="border border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-slate-900 transition">
+           {/*--<button className="border border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-slate-900 transition">
               Become an Organizer
-            </button>
+            </button>*/}
 
           </div>
 
