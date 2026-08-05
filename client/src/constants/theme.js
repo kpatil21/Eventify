@@ -5,3 +5,9 @@ export const COLORS = {
   background: "#F8FAFC",
   gray: "#64748B",
 };
+
+export const LAYOUT = {
+  sidebarWidth: "280px",
+  topbarHeight: "72px",
+  containerPadding: "2rem",
+};
