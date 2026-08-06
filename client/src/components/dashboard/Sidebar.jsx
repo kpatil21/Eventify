@@ -72,11 +72,39 @@ export default function Sidebar() {
       </nav>
       
       {/* Footer */}
-      <div className="border-t border-slate-200 p-4">
-        <p className="text-center text-xs text-slate-400">
-          Kaksha Events v1.0
-        </p>
-      </div>
+   {/* Bottom Section */}
+<div className="border-t border-slate-200 p-4 space-y-4">
+
+  {/* User Info */}
+  <div className="rounded-xl bg-slate-50 p-3">
+    <p className="text-sm font-semibold text-slate-800">
+      {user?.name || "Guest User"}
+    </p>
+
+    <p className="text-xs capitalize text-slate-500">
+      {role}
+    </p>
+  </div>
+
+  {/* Logout Button */}
+  <button
+    onClick={() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      window.location.href = "/";
+    }}
+    className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 font-medium text-red-600 transition-all duration-200 hover:bg-red-100"
+  >
+    🚪
+    <span>Logout</span>
+  </button>
+
+  {/* Footer */}
+  <p className="text-center text-xs text-slate-400">
+    Kaksha Events v1.0
+  </p>
+
+</div>
 
     </aside>
   );

@@ -2,25 +2,21 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../components/dashboard/Sidebar";
 import Topbar from "../components/dashboard/Topbar";
 
-
 export default function DashboardLayout() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Dashboard Grid */}
-      <div className="grid lg:grid-cols-[280px_1fr]">
-        {/* Sidebar */}
-        <Sidebar />
+    <div className="flex h-screen overflow-hidden bg-slate-50">
+      {/* Sidebar */}
+      <Sidebar />
 
-        {/* Main Content */}
-        <div className="flex min-h-screen flex-col">
-          {/* Top Navigation */}
-          <Topbar />
+      {/* Main Section */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        {/* Topbar */}
+        <Topbar />
 
-          {/* Page Content */}
-          <main className="flex-1 p-6 lg:p-8">
-            <Outlet />
-          </main>
-        </div>
+        {/* Scrollable Content */}
+        <main className="flex-1 overflow-y-auto p-6 lg:p-8">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

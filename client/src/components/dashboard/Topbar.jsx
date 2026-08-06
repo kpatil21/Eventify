@@ -1,3 +1,8 @@
+ // Get logged-in user
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // Get role
+  const role = user?.role || "parent";
 export default function Topbar() {
   return (
     <header className="flex h-[72px] items-center justify-between border-b border-slate-200 bg-white px-6">
@@ -17,10 +22,10 @@ export default function Topbar() {
 
           <div>
             <p className="text-sm font-semibold text-slate-800">
-              Kalpesh
+              {user?.name}
             </p>
             <p className="text-xs text-slate-500">
-              Parent
+               {role}
             </p>
           </div>
         </div>
